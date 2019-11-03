@@ -1,4 +1,4 @@
-<% include ./partials/header %>
+<% include ../partials/header %>
 
 <h1>Edit <%= member.firstName + " " + member.lastName %></h1>
     <form action="/members/<%= member._id%>?_method=PUT" method="POST">
@@ -8,4 +8,4 @@
         <input type="submit">
     </form>
 
-<% include ./partials/footer %>
+<% include ../partials/footer %>
