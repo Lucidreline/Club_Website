@@ -1,0 +1,11 @@
+<% include ../partials/header %>
+
+    <form action="/announcements/<%=announcement._id%>?_method=PUT" method="POST">
+        <input type="text" name="announcement[title]" placeholder="Title" value="<%=announcement.title%>">
+        <div>
+            <textarea name="announcement[body]"><%=announcement.body%></textarea>
+        </div>
+        <input type="submit">
+    </form>
+
+<% include ../partials/header %>

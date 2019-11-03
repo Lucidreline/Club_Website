@@ -1,0 +1,11 @@
+<% include ../partials/header %>
+
+    <form action="/announcements" method="POST">
+        <input type="text" name="announcement[title]" placeholder="Title">
+        <div>
+            <textarea name="announcement[body]"></textarea>
+        </div>
+        <input type="submit">
+    </form>
+
+<% include ../partials/footer %>

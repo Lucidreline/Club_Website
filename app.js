@@ -6,7 +6,9 @@ var expressSanitizer = require("express-sanitizer"),
     app = express(),
     port = 8080;
 
-var memberRoutes = require("./routes/members");
+var announcementRoutes = require("./routes/announcements"),
+    memberRoutes = require("./routes/members");
+
 
 //app config
     //Tells the app to render ejs files so i dont need to add the .ejs extension every time
@@ -23,7 +25,8 @@ app.use(expressSanitizer())
 app.use(methodOverride("_method"))
 
 //Uses the routes aka the refactored restful routes
-app.use(memberRoutes)
+app.use(memberRoutes);
+app.use(announcementRoutes);
 
 //Connects to mongodb ... currently connects locally
 mongoose.connect("mongodb://localhost:27017/club", { useNewUrlParser: true, useUnifiedTopology: true });

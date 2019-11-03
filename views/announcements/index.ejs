@@ -1,0 +1,22 @@
+<% include ../partials/header %>
+
+    <h1>Announcements</h1>
+
+    <% announcements.forEach(function(announcement){ %>
+
+        <h1>
+            <%= announcement.title %>  
+        </h1>
+        <p>
+            <%= announcement.body %>    
+        </p>
+        <p>
+            <%= announcement.created.toDateString() %>    
+        </p>
+        <a href="/announcements/<%= announcement._id %>">
+            Read More
+        </a>
+
+    <% }); %>
+
+<% include ../partials/footer %>
