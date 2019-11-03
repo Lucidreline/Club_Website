@@ -1,5 +1,8 @@
 <% include ./partials/header %>
 
     <h2><%= member.firstName %></h2>
+    <form  action="/members/<%= member._id %>?_method=DELETE" method="POST">
+        <button>Delete</button>
+    </form>
 
 <% include ./partials/footer %>

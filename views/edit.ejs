@@ -1,0 +1,11 @@
+<% include ./partials/header %>
+
+<h1>Edit <%= member.firstName + " " + member.lastName %></h1>
+    <form action="/members/<%= member._id%>?_method=PUT" method="POST">
+        <input type="text" name="member[firstName]" value="<%= member.firstName%>">
+        <input type="text" name="member[lastName]" value="<%= member.lastName%>">
+        <input type="text" name="member[position]" value="<%= member.position%>">
+        <input type="submit">
+    </form>
+
+<% include ./partials/footer %>
