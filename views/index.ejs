@@ -1,0 +1,18 @@
+<% include ./partials/header %>
+
+<h1>Index page!</h1>
+
+<% members.forEach(function(member) { %>
+    <div>
+        <h2>
+            Name:
+            <%= member.firstName + " " + member.lastName %>
+        </h2>
+        <p>
+            position: <%= member.position %>
+        </p>
+        <a href="/members/<%= member._id %>">Read More!</a>
+    </div>
+<% }) %>
+
+<% include ./partials/footer %>
