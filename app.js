@@ -7,7 +7,8 @@ var expressSanitizer = require("express-sanitizer"),
     port = 8080;
 
 var announcementRoutes = require("./routes/announcements"),
-    memberRoutes = require("./routes/members");
+    memberRoutes = require("./routes/members"),
+    pagesRoutes = require("./routes/mainPages");
 
 
 //app config
@@ -27,13 +28,14 @@ app.use(methodOverride("_method"))
 //Uses the routes aka the refactored restful routes
 app.use(memberRoutes);
 app.use(announcementRoutes);
+app.use(pagesRoutes);
 
 //Connects to mongodb ... currently connects locally
 mongoose.connect("mongodb://localhost:27017/club", { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 app.get("/", function(req, res){
-    res.redirect("/members");
+    res.redirect("/home");
 })
 
 
