@@ -1,11 +1,26 @@
 <% include ../partials/header %>
 
-    <form action="/announcements" method="POST">
+    <!-- <form action="/announcements" method="POST">
         <input type="text" name="announcement[title]" placeholder="Title">
         <div>
             <textarea name="announcement[body]"></textarea>
         </div>
         <input type="submit">
-    </form>
+    </form> -->
+
+    <form action="/announcements" method="POST">
+        <div class="form-group">
+          <label for="newAnnouncementTitle">Announcement Title</label>
+          <input type="text" name="announcement[title]" placeholder="Title" class="form-control" id="newAnnouncementTitle" aria-describedby="AnnouncementTitleHelp" >
+          <small id="AnnouncementTitleHelp" class="form-text text-muted">Try to keep the title short.</small>
+
+        </div>
+        <div class="form-group">
+            <label for="newAnnouncementBody">Announcement Body</label>
+            <textarea name="announcement[body]" class="form-control" id="newAnnouncementBody" rows="3"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
 
 <% include ../partials/footer %>

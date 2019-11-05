@@ -24,7 +24,7 @@ router.get("/members/new", isLoggedIn, function(req, res){
 router.post("/members", isLoggedIn, function(req, res){
     //create member
         //removes the script from position... not useful now but it will later
-    req.body.member.position = req.sanitize(req.body.member.body)
+    //req.body.member.position = req.sanitize(req.body.member.body)
     Member.create(req.body.member, function(err, newMember){
         if(err){
             res.render("members/new")
@@ -90,7 +90,7 @@ function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }else{
-        res.redirect("/admin/login");
+        res.redirect("/admin/register");
     }
 }
 

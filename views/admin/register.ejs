@@ -1,21 +1,53 @@
 <% include ../partials/header %>
 
 <h1>Admin Login</h1>
+
+
 <div class="row">
     <div class="col-lg">
-        <form action="/admin/login" method="POST">
+        <!-- <form action="/admin/login" method="POST">
             <input type="text" name="username" placeholder="Username">
             <input type="password" name="password" placeholder="Password">
             <button>Submit</button>
+        </form> -->
+
+        <form action="/admin/login" method="POST">
+            <div class="form-group">
+                <label for="adminUsername">Username</label>
+                <input type="text" name="username" placeholder="Username" class="form-control" id="adminUsername">
+            </div>
+            <div class="form-group">
+                <label for="adminPassword">Password</label>
+                <input type="password" name="password" placeholder="Password" class="form-control" id="adminPassword">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
         </form>
+
     </div>
     <div class="col-lg">
-        <form action="/admin/register" method="POST">
+        <!-- <form action="/admin/register" method="POST">
             <input type="text" name="username" placeholder="Username">
             <input type="password" name="password" placeholder="Password">
             <input type="password" name="key" placeholder="Admin Key">
             <button>Submit</button>
+        </form> -->
+
+        <form action="/admin/register" method="POST">
+            <div class="form-group">
+                <label for="adminRegisterUsername">Username</label>
+                <input type="text" name="username" placeholder="Username" class="form-control" id="adminRegisterUsername">
+            </div>
+            <div class="form-group">
+                <label for="adminRegisterPassword">Password</label>
+                <input type="password" name="password" placeholder="Password" class="form-control" id="adminRegisterPassword">
+            </div>
+            <div class="form-group">
+                <label for="adminRegisterKey">Password</label>
+                <input type="password" name="key" placeholder="Key" class="form-control" id="adminRegisterKey">
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
         </form>
+
     </div>
 </div>
 
