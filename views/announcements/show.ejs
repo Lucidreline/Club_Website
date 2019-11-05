@@ -10,8 +10,12 @@
     <span>
         <%= announcement.created.toDateString() %>
     </span>
-    <form action="/announcements/<%= announcement._id %>?_method=DELETE" method="POST">
-        <button>DELETE!</button>
-    </form>
 
+    <%if(currentAdmin){%>
+        <a href="/announcements/<%= announcement._id %>/edit"><button>Edit</button></a>
+        <form action="/announcements/<%= announcement._id %>?_method=DELETE" method="POST">
+            <button>DELETE!</button>
+        </form>
+    <%}%>
+    
 <% include ../partials/footer %>

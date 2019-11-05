@@ -3,6 +3,8 @@ var router = express.Router();
 var passport = require("passport");
 var localStrategy = require("passport-local")
 
+require("dotenv").config();
+
 //require the model for mongoose
 var Admin = require("../models/admin");
 
@@ -10,10 +12,6 @@ passport.use(new localStrategy(Admin.authenticate()))
 passport.serializeUser(Admin.serializeUser());
 passport.deserializeUser(Admin.deserializeUser());
 
-//secretPage
-router.get("/secret", isLoggedIn, function(req, res){
-    res.render("admin/secret");
-})
 
 //Register ============================
 router.get("/admin/register", function(req, res){
@@ -23,25 +21,26 @@ router.get("/admin/register", function(req, res){
 router.post("/admin/register", function(req, res){
     req.body.username;
     req.body.password;
-    Admin.register(new Admin({username: req.body.username}), req.body.password, function(err, admin){
-        if(err){
-            console.log("Error registering a new Admin");
-            return res.render("admin/register");
-        }
-        passport.authenticate("local")(req, res, function(){
-            res.render("admin/secret");
+    if(req.body.key == process.env.ADMIN_KEY){
+        Admin.register(new Admin({username: req.body.username}), req.body.password, function(err, admin){
+            if(err){
+                console.log("Error registering a new Admin");
+                return res.render("admin/register");
+            }
+            passport.authenticate("local")(req, res, function(){
+                res.render("mainPages/home");
+            })
         })
-    })
+    }else{
+        res.render("admin/register");
+    }
+    
 })
 //==========================================
 
 //Login ====================================
-router.get("/admin/login", function(req, res){
-    res.render("admin/login");
-})
-
 router.post("/admin/login", passport.authenticate("local",{
-    successRedirect: "/secret",
+    successRedirect: "/",
     failureRedirect: "/admin/login"
 }) ,function(req, res){
 

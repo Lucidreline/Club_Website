@@ -1,7 +1,24 @@
-<h1>Registration Form</h1>
+<% include ../partials/header %>
 
-<form action="/admin/register" method="POST">
-    <input type="text" name="username" placeholder="Username">
-    <input type="password" name="password" placeholder="Password">
-    <button>Submit</button>
-</form>
+<h1>Admin Login</h1>
+<div class="row">
+    <div class="col-lg">
+        <form action="/admin/login" method="POST">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <button>Submit</button>
+        </form>
+    </div>
+    <div class="col-lg">
+        <form action="/admin/register" method="POST">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <input type="password" name="key" placeholder="Admin Key">
+            <button>Submit</button>
+        </form>
+    </div>
+</div>
+
+<% include ../partials/footer %>
+
+

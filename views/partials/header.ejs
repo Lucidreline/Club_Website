@@ -22,9 +22,15 @@
                     <li class="nav-item">
                       <a class="nav-link" href="/members">Members</a>
                     </li>
+                    <%if(!currentAdmin){ %>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/admin/register">Admin</a>
+                      </li>
+                    <%}else{ %>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Admin</a>
-                    </li>
+                      <a class="nav-link" href="/admin/logout">Log Out</a>
+                    </li> 
+                    <% } %>
                   </ul>
                 </div>
               </nav>

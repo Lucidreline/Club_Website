@@ -17,6 +17,7 @@ var announcementRoutes = require("./routes/announcements"),
     pagesRoutes = require("./routes/mainPages"),
     adminRoutes = require("./routes/admin");
 
+    
 //Connects to mongodb ... currently connects locally
 mongoose.connect("mongodb://localhost:27017/club", { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -24,7 +25,6 @@ app.use(require("express-session")({
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false
-
 }))
 
 //app config
@@ -52,43 +52,16 @@ var Admin = require("./models/admin");
 passport.serializeUser(Admin.serializeUser());
 passport.deserializeUser(Admin.deserializeUser());
 
+//tjis is like a global middleware that makes sure that the user info is available in any route
+app.use(function(req, res, next){
+    res.locals.currentAdmin = req.user;
+    next();
+})
 //Uses the routes aka the refactored restful routes
 app.use(memberRoutes);
 app.use(announcementRoutes);
 app.use(pagesRoutes);
 app.use(adminRoutes);
-
-
-//REFACTOR -----------------
-
-
-
-//Create a new
-app.get("/admin/register", function(req, res){
-    res.render("admin/register")
-});
-
-//secretPage
-
-
-app.post("/admin/login", function(req, res){
-    
-});
-
-// app.post("/admin/register", function(req, res){
-     
-// });
-
-//REFACTOR -----------
-
-
-
-
-
-app.get("/", function(req, res){
-    res.redirect("/home");
-})
-
 
 
 app.listen(port, function(){

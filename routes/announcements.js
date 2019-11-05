@@ -17,12 +17,12 @@ router.get("/announcements", function(req, res){
 })
 
 //New announcement route
-router.get("/announcements/new", function(req, res){
+router.get("/announcements/new", isLoggedIn, function(req, res){
     res.render("announcements/new");
 })
 
 //Create a new announcement
-router.post("/announcements", function(req, res){
+router.post("/announcements", isLoggedIn,  function(req, res){
     Announcement.create(req.body.announcement, function(err, newAnnouncement){
         if(err){
             console.log("Could not create Announcement");
@@ -40,13 +40,13 @@ router.get("/announcements/:id", function(req, res){
             console.log("Could not find the announcement");
             redirect("/announcements");
         }else{
-            res.render("announcements/show", {announcement: foundAnnouncement})
+            res.render("announcements/show", {announcement: foundAnnouncement, currentAdmin: req.user})
         }
     })
 })
 
 //Edit an announcement
-router.get("/announcements/:id/edit", function(req, res){
+router.get("/announcements/:id/edit",  isLoggedIn, function(req, res){
     Announcement.findById(req.params.id, function(err, foundAnnouncement){
         if(err){
             console.log("Could not find the announcement to edit");
@@ -58,7 +58,7 @@ router.get("/announcements/:id/edit", function(req, res){
 })
 
 //Update the announcement with the edit
-router.put("/announcements/:id", function(req, res){
+router.put("/announcements/:id", isLoggedIn,  function(req, res){
     Announcement.findByIdAndUpdate(req.params.id, req.body.announcement, function(err, updatedAnouncement){
         if(err){
             console.log("Could not update announcement.");
@@ -69,7 +69,7 @@ router.put("/announcements/:id", function(req, res){
     })
 })
 
-router.delete("/announcements/:id", function(req, res){
+router.delete("/announcements/:id", isLoggedIn, function(req, res){
     Announcement.findByIdAndRemove(req.params.id, function(err, deletedAnnouncement){
         if(err){
             console.log("Could not delete announcement");
@@ -78,6 +78,14 @@ router.delete("/announcements/:id", function(req, res){
         }
     })
 })
+
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }else{
+        res.redirect("/admin/login");
+    }
+}
 
 
 module.exports = router;

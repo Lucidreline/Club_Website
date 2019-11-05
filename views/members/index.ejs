@@ -1,6 +1,10 @@
 <% include ../partials/header %>
 
-<h1>Index page!</h1>
+<h1>Members page!</h1>
+
+<%if(currentAdmin){ %>
+    <a href="/members/new"><button>Add a Member!</button></a>
+<% } %>
 
 <% members.forEach(function(member) { %>
     <div>

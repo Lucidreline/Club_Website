@@ -1,5 +1,9 @@
 <% include ../partials/header %>
 
+<% if(currentAdmin){ %>
+    <h1> Welcome Admin!</h1>
+<%}%>
+
 <div class="container">
     <div class="">
         <h1>
@@ -32,9 +36,5 @@
         </div>
     </div>
 </div>
-
-<a href="/admin/register">register</a>
-<a href="/admin/login">Log In</a>
-<a href="/admin/logout">Log Out</a>
 
 <% include ../partials/footer %>

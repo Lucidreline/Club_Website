@@ -1,7 +1,9 @@
 <% include ../partials/header %>
 
     <h1>Announcements</h1>
-
+    <%if(currentAdmin){ %>
+        <a href="/announcements/new"><button>Make An Announcement!</button></a>
+    <% } %>
     <% announcements.forEach(function(announcement){ %>
 
         <h1>
