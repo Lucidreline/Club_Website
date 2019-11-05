@@ -69,19 +69,7 @@ app.get("/admin/register", function(req, res){
 });
 
 //secretPage
-app.post("/admin/register", function(req, res){
-    req.body.username;
-    req.body.password;
-    Admin.register(new Admin({username: req.body.username}), req.body.password, function(err, admin){
-        if(err){
-            console.log("Error registering a new Admin");
-            return res.render("admin/register");
-        }
-        passport.authenticate("local")(req, res, function(){
-            res.redirect("/")
-        })
-    })
-})
+
 
 app.post("/admin/login", function(req, res){
     

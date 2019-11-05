@@ -1,27 +1,66 @@
 var express = require("express");
 var router = express.Router();
+var passport = require("passport");
+var localStrategy = require("passport-local")
 
 //require the model for mongoose
 var Admin = require("../models/admin");
 
-//Create a new
-router.get("/admin/login", function(req, res){
-    res.render("admin/login")
-});
+passport.use(new localStrategy(Admin.authenticate()))
+passport.serializeUser(Admin.serializeUser());
+passport.deserializeUser(Admin.deserializeUser());
 
 //secretPage
-router.get("/secret", function(req, res){
+router.get("/secret", isLoggedIn, function(req, res){
     res.render("admin/secret");
 })
 
-router.post("/admin/login", function(req, res){
-    
+//Register ============================
+router.get("/admin/register", function(req, res){
+    res.render("admin/register")
 });
 
-// router.post("/admin/register", function(req, res){
-     
-// });
+router.post("/admin/register", function(req, res){
+    req.body.username;
+    req.body.password;
+    Admin.register(new Admin({username: req.body.username}), req.body.password, function(err, admin){
+        if(err){
+            console.log("Error registering a new Admin");
+            return res.render("admin/register");
+        }
+        passport.authenticate("local")(req, res, function(){
+            res.render("admin/secret");
+        })
+    })
+})
+//==========================================
 
+//Login ====================================
+router.get("/admin/login", function(req, res){
+    res.render("admin/login");
+})
 
+router.post("/admin/login", passport.authenticate("local",{
+    successRedirect: "/secret",
+    failureRedirect: "/admin/login"
+}) ,function(req, res){
+
+})
+//==========================================
+
+//LOG OUT =================================
+router.get("/admin/logout", function(req, res){
+    req.logOut();
+    res.redirect("/");
+})
+//==========================================
+
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }else{
+        res.redirect("/admin/login");
+    }
+}
 
 module.exports = router
