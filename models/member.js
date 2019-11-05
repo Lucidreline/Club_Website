@@ -4,7 +4,8 @@ var mongoose = require("mongoose");
 var MemberSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
-    position: String
+    position: String,
+    image: String,
 });
 var Member = mongoose.model("Member", MemberSchema);
 

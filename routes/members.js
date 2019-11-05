@@ -1,8 +1,32 @@
 var express = require("express");
 var router = express.Router();
+require("dotenv").config();
 
 //This is requiring the schema for a member
 var Member = require("../models/member");
+
+// For Image Uploading ---------------
+var multer = require('multer');
+var storage = multer.diskStorage({
+  filename: function(req, file, callback) {
+    callback(null, Date.now() + file.originalname);
+  }
+});
+var imageFilter = function (req, file, cb) {
+    // accept image files only
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+};
+var upload = multer({ storage: storage, fileFilter: imageFilter})
+
+var cloudinary = require('cloudinary').v2;
+cloudinary.config({ 
+  cloud_name: 'clubphotos', 
+  api_key: process.env.CLOUDINARY_API_KEY, 
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 //Members route
 router.get("/members", function(req, res){
@@ -21,19 +45,25 @@ router.get("/members/new", isLoggedIn, function(req, res){
 })
 
 //Create Member route
-router.post("/members", isLoggedIn, function(req, res){
+router.post("/members", isLoggedIn, upload.single("image"), function(req, res){
     //create member
         //removes the script from position... not useful now but it will later
     //req.body.member.position = req.sanitize(req.body.member.body)
-    Member.create(req.body.member, function(err, newMember){
-        if(err){
-            res.render("members/new")
-            console.log("Error creating the member");
-        }else{
-            //redirect
-            res.redirect("/members");
-        }
+    cloudinary.uploader.upload(req.file.path, function(err, result){
+        req.body.member.image = result.secure_url; 
+        
+        Member.create(req.body.member, function(err, newMember){
+            if(err){
+                res.render("members/new")
+                console.log("Error creating the member");
+            }else{
+                //redirect
+                res.redirect("/members");
+            }
+        })
     })
+
+    
 })
 
 //Show - Zooms into a spesific option and showcases the details

@@ -8,7 +8,7 @@
         <input type="submit">
     </form> -->
 
-    <form action="/members" method="POST">
+    <form action="/members" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="newMemberFirstName">Member's First Name</label>
             <input type="text" name="member[firstName]" placeholder="First Name" class="form-control" id="newMemberFirstName">
@@ -20,6 +20,10 @@
         <div class="form-group">
             <label for="newMemberPosition">Member's Position</label>
             <input type="text" name="member[position]" placeholder="Position" class="form-control" id="newMemberPosition">
+        </div>
+        <div class="form-group">
+            <label for="image">Headshot of member</label>
+            <input type="file" id="image" name="image" accept="image/*">
         </div>
               
 
