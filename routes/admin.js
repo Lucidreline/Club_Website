@@ -34,7 +34,6 @@ router.post("/admin/register", function(req, res){
     }else{
         res.render("admin/register");
     }
-    
 })
 //==========================================
 
