@@ -18,6 +18,14 @@
             <input value="<%= member.lastName%>" type="text" name="member[lastName]" placeholder="Last Name" class="form-control" id="editMemberLastName">
         </div>
         <div class="form-group">
+                <% if(member.boardMember){ %>
+                    <input checked type="checkbox" name="member[boardMember]" value="true" class="form-check-input" id="isBoardMember" >
+                <% }else{ %>
+                    <input type="checkbox" name="member[boardMember]" value="true" class="form-check-input" id="isBoardMember" >
+                <% } %>
+            <label for="isBoardMember">Board Member?</label>
+        </div>
+        <div class="form-group">
             <label for="editMemberPosition">Member's Position</label>
             <input value="<%= member.position%>" type="text" name="member[position]" placeholder="Position" class="form-control" id="editMemberPosition">
         </div>

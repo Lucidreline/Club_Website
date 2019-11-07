@@ -22,8 +22,12 @@
             <input type="text" name="member[position]" placeholder="Position" class="form-control" id="newMemberPosition">
         </div>
         <div class="form-group">
+            <input type="checkbox" name="member[boardMember]" value="true" class="form-check-input" id="isBoardMember">
+            <label for="isBoardMember">Board Member?</label>
+        </div>
+        <div class="form-group">
             <label for="image">Headshot of member</label>
-            <input type="file" id="image" name="image" accept="image/*">
+            <input type="file" id="image" name="image" accept="image/*" required>
         </div>
               
 

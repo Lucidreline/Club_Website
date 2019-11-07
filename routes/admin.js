@@ -40,7 +40,7 @@ router.post("/admin/register", function(req, res){
 //Login ====================================
 router.post("/admin/login", passport.authenticate("local",{
     successRedirect: "/",
-    failureRedirect: "/admin/login"
+    failureRedirect: "/admin/register"
 }) ,function(req, res){
 
 })

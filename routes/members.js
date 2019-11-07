@@ -50,7 +50,7 @@ router.post("/members", isLoggedIn, upload.single("image"), function(req, res){
         //removes the script from position... not useful now but it will later
     //req.body.member.position = req.sanitize(req.body.member.body)
     cloudinary.uploader.upload(req.file.path, function(err, result){
-        req.body.member.image = result.secure_url; 
+        req.body.member.image = result.secure_url;
         
         Member.create(req.body.member, function(err, newMember){
             if(err){
@@ -93,6 +93,12 @@ router.get("/members/:id/edit", isLoggedIn, function(req, res){
 //Update Route
 router.put("/members/:id", isLoggedIn, function(req, res){
     //Member.findByIdAndUpdate(ID to find, new DataCue, callback)
+    
+    //This allows us to remove someone as a board member
+    if(!req.body.member.boardMember){
+        //if the checkbox is not clicked
+        req.body.member.boardMember = false;
+    }
     Member.findByIdAndUpdate(req.params.id, req.body.member, function(err, updatedMember){
         if(err){
             console.log("Could not update member");

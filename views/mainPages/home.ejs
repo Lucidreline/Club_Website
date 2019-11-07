@@ -20,20 +20,20 @@
         <h2>
             Meet the board of directors
         </h2>
+
         <div class="row">
-            <div class="col-lg board-thumbnails" style="background: url('../TestPhotos/1.jpg') 50% 50% no-repeat;">
-
-            </div>
-            <div class="col-lg board-thumbnails" style="background: url('../TestPhotos/2.jpg') 50% 25% no-repeat;">
-
-            </div>
-            <div class="col-lg board-thumbnails" style="background: url('../TestPhotos/3.jpg') 50% 25% no-repeat;">
-
-            </div>
-            <div class="col-lg board-thumbnails" style="background: url('../TestPhotos/4.jpg') 65% 50% no-repeat;">
-           
-            </div>
+            <% boardMembers.forEach(function(member){ %>
+                <div class="col-md-4 col-sm-12">
+                    <img class="boardMemberHeadshots" src="<%= member.image %>">
+                    <h4 class="text-center"><%= member.firstName %></h4>
+                </div>
+            <% })%>
         </div>
+
+        
+            
+            
+        
     </div>
 
 
