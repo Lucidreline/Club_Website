@@ -24,20 +24,48 @@
         <div class="row">
             <% bMembers.forEach(function(member){ %>
                 <div class="col-md-4 col-sm-12">
-                    <img class="boardMemberHeadshots" src="<%= member.image %>">
+                    <a href="/members/<%= member._id %>">
+                            <img class="boardMemberHeadshots" src="<%= member.image %>">
+                    </a>
                     <h4 class="text-center"><%= member.firstName %></h4>
                 </div>
             <% })%>
         </div>
 
+        <br>
+        <hr>
+        <br>
+
         <h1>Newest Members</h1>
         <div class="row">
             <% for(var i = 0; i<2; i++){ %>
                 <div class="col-md-4 col-sm-12">
-                    <img class="boardMemberHeadshots" src="<%= allMembers[i].image %>">
+                    <a href="/members/<%= allMembers[i]._id %>">
+                        <img class="boardMemberHeadshots" src="<%= allMembers[i].image %>">
+                    </a>
                     <h4 class="text-center"><%= allMembers[i].firstName %></h4>
                 </div>
             <% }%>
+            <div class="col-md-4 align-self-center text-center">
+                <a href="/members"><button>View More!</button></a>
+            </div>
+        </div>
+
+        <br>
+        <hr>
+        <br>
+
+        <h1 class="text-center">Latest Announcements</h1>
+        <div class="row">
+            <% for(var i = 0; i<2; i++){ %>
+                <div class="col-12 text-center">
+                    <h4><%= announcements[i].title %></h4>
+                    <p><%= announcements[i].body %></p>
+                </div>
+            <% }%>
+            <div class="col-12 text-center">
+                <a href="/announcements"><button class="btn btn-primary">View More</button></a>
+            </div>
             
         </div>
         
