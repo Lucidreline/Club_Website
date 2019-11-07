@@ -4,7 +4,9 @@ var mongoose = require("mongoose");
 var MemberSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
+    class: String,
     position: String,
+    bio: String,
     image: String,
     imageId: String,
     boardMember: Boolean

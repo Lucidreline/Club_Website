@@ -28,6 +28,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
+
 //Members route
 router.get("/members", function(req, res){
     Member.find({}, function(err, members){
@@ -39,10 +40,12 @@ router.get("/members", function(req, res){
     });
 })
 
+
 //New Member route
 router.get("/members/new", isLoggedIn, function(req, res){
     res.render("members/new");
 })
+
 
 //Create Member route
 router.post("/members", isLoggedIn, upload.single("image"), function(req, res){
@@ -51,7 +54,7 @@ router.post("/members", isLoggedIn, upload.single("image"), function(req, res){
     //req.body.member.position = req.sanitize(req.body.member.body)
     cloudinary.uploader.upload(req.file.path, function(err, result){
         if(err){
-            console.log("Could not upload photo to cloudinary");
+            console.log("Could not upload photo to cloudinary: " + err);
             return res.redirect("back");
         }
         req.body.member.image = result.secure_url;
@@ -66,10 +69,9 @@ router.post("/members", isLoggedIn, upload.single("image"), function(req, res){
                 res.redirect("/members");
             }
         })
-    })
-
-    
+    }) 
 })
+
 
 //Show - Zooms into a spesific option and showcases the details
 router.get("/members/:id", function(req, res){
@@ -83,6 +85,7 @@ router.get("/members/:id", function(req, res){
     })
 })
 
+
 //Edit
 router.get("/members/:id/edit", isLoggedIn, function(req, res){
     Member.findById(req.params.id, function(err, foundMember){
@@ -95,11 +98,9 @@ router.get("/members/:id/edit", isLoggedIn, function(req, res){
     })
 })
 
+
 //Update Route
 router.put("/members/:id", isLoggedIn, upload.single("image"), function(req, res){
-    //This allows us to remove someone as a board member
-    
-    console.log("Made it here 1");
     //Member.findByIdAndUpdate(ID to find, new DataCue, callback)
     Member.findById(req.params.id, async function(err, foundMember){
         if(err){
@@ -108,7 +109,6 @@ router.put("/members/:id", isLoggedIn, upload.single("image"), function(req, res
         }else{
             if(req.file){
                 try{
-                    console.log("in the try catch")
                     await cloudinary.uploader.destroy(foundMember.imageId)
                     var result = await cloudinary.uploader.upload(req.file.path)
                     foundMember.image = result.secure_url;
@@ -116,24 +116,26 @@ router.put("/members/:id", isLoggedIn, upload.single("image"), function(req, res
                 }catch(err){
                     console.log("Could not update image");
                     return res.redirect("/members")
-                }         
-                      
+                }                
             }
+                //This allows us to remove someone as a board member
             if(req.body.member.boardMember){
                 //if the checkbox is not clicked
                 foundMember.boardMember = true;
             }else{
                 foundMember.boardMember = false;
             }
-
             foundMember.firstName = req.body.member.firstName
             foundMember.lastName = req.body.member.lastName
             foundMember.position  = req.body.member.position
+            foundMember.class = req.body.member.class
+            foundMember.bio = req.body.member.bio
             foundMember.save()
             res.redirect("/members/" + foundMember._id);
         }
     })
 })
+
 
 //DESTROYER!
 router.delete("/members/:id", isLoggedIn, function(req, res){
@@ -150,6 +152,7 @@ router.delete("/members/:id", isLoggedIn, function(req, res){
         }
     })
 })
+
 
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){

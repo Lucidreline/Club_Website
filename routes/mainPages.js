@@ -9,6 +9,7 @@ router.get("/", function(req, res){
 })
 
 router.get("/home", function(req, res){
+    var boardMembers, members, announcements;
     Member.find({boardMember:true}, function(err, foundMembers){
         if(err){
             console.log("Could not find members for /home")

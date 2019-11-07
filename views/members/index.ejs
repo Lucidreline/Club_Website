@@ -6,17 +6,42 @@
     <a href="/members/new"><button>Add a Member!</button></a>
 <% } %>
 
+<% var counter = 1, photoOrder = 1, nameOrder = 2, bioOrder = 3 %>
+
 <% members.forEach(function(member) { %>
-    <div>
-        <h2>
-            <%= member.firstName + " " + member.lastName.slice(0,1) %>
-        </h2>
-        <img src="<%= member.image %>" alt="">
-        <p>
-            position: <%= member.position %>
-        </p>
-        <a href="/members/<%= member._id %>">Read More!</a>
+    <% counter++ %>
+    <% if(counter % 2 == 0){ %>
+        <%  photoOrder = 1; %>
+        <%  bioOrder = 3; %>
+    <%}else{%>
+        <%  photoOrder = 3; %>
+        <%  bioOrder = 1; %>
+    <% } %>
+
+    <div class="row my-4">
+        <div class="col-lg-4 order-<%=photoOrder.toString()%>">
+            <img class="boardMemberHeadshots" src="<%= member.image %>" alt="">
+        </div>
+        <div class="col-lg-2 order-2 text-center">
+            <h2>
+                <%= member.firstName + " " + member.lastName.slice(0,1) %>
+            </h2>
+            <p>
+                <%= member.position %>
+            </p>
+        </div>
+        <div class="col-lg-6 order-<%=bioOrder.toString()%>">
+            <h3 class="text-center">About Me:</h3>
+            <p>
+                <%= member.bio.slice(0,150) %>...    
+            </p>
+            
+                <a href="/members/<%= member._id %>"><button class="btn btn-primary">Read More!</button></a>
+                
+
+        </div>
     </div>
+    <hr>
 <% }) %>
 
 <% include ../partials/footer %>

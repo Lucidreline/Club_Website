@@ -1,5 +1,7 @@
 <% include ../partials/header %>
 
+<% var classOptions = ["Freshman", "Sophomore", "Junior", "Senior"]%>
+
 <h1>Edit <%= member.firstName + " " + member.lastName %></h1>
     <!-- <form action="/members/<%= member._id%>?_method=PUT" method="POST">
         <input type="text" name="member[firstName]" value="<%= member.firstName%>">
@@ -18,6 +20,20 @@
             <input value="<%= member.lastName%>" type="text" name="member[lastName]" placeholder="Last Name" class="form-control" id="editMemberLastName">
         </div>
         <div class="form-group">
+            <label for="newMemberClass">Member's Class</label>
+            <select required name="member[class]" id="newMemberClass">
+
+                <% classOptions.forEach(function(option){%>
+                <% if(option == member.class){%>
+                    <option selected value="<%= option %>"><%= option %></option>
+                <% }else{%>
+                    <option value="<%= option %>"><%= option %></option>
+                <% }%>
+                <% })%>
+
+            </select>
+        </div>
+        <div class="form-group">
                 <% if(member.boardMember){ %>
                     <input checked type="checkbox" name="member[boardMember]" value="true" class="form-check-input" id="isBoardMember" >
                 <% }else{ %>
@@ -28,6 +44,10 @@
         <div class="form-group">
             <label for="editMemberPosition">Member's Position</label>
             <input value="<%= member.position%>" type="text" name="member[position]" placeholder="Position" class="form-control" id="editMemberPosition">
+        </div>
+        <div class="form-group">
+            <label for="newMemberBio">Member Bio</label>
+            <textarea minlength="250" required name="member[bio]" class="form-control" id="newMemberBio" rows="3"><%= member.bio %></textarea>
         </div>
         <div class="form-group">
             <label for="image">Headshot of member</label>

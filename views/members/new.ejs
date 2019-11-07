@@ -11,15 +11,28 @@
     <form action="/members" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="newMemberFirstName">Member's First Name</label>
-            <input type="text" name="member[firstName]" placeholder="First Name" class="form-control" id="newMemberFirstName">
+            <input required type="text" name="member[firstName]" placeholder="First Name" class="form-control" id="newMemberFirstName">
         </div>
         <div class="form-group">
             <label for="newMemberLastName">Member's Last Name</label>
-            <input type="text" name="member[lastName]" placeholder="Last Name" class="form-control" id="newMemberLastName">
+            <input required type="text" name="member[lastName]" placeholder="Last Name" class="form-control" id="newMemberLastName">
+        </div>
+        <div class="form-group">
+            <label for="newMemberClass">Member's Last Name</label>
+            <select required name="member[class]" id="newMemberClass">
+                <option selected value="Freshman">Freshman</option>
+                <option value="Sophomore">Sophomore</option>
+                <option value="Junior">Junior</option>
+                <option value="Senior">Senior</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="newMemberPosition">Member's Position</label>
-            <input type="text" name="member[position]" placeholder="Position" class="form-control" id="newMemberPosition">
+            <input type="text" name="member[position]" placeholder="Position" class="form-control" id="newMemberPosition" required>
+        </div>
+        <div class="form-group">
+            <label for="newMemberBio">Member Bio</label>
+            <textarea minlength="250" required name="member[bio]" class="form-control" id="newMemberBio" rows="3"></textarea>
         </div>
         <div class="form-group">
             <input type="checkbox" name="member[boardMember]" value="true" class="form-check-input" id="isBoardMember">
