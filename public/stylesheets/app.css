@@ -19,3 +19,9 @@
   #show-page-photo{
     height: 650px;
   }
+
+  .footer{
+    background-color: #2f3640;
+    box-shadow: 0 50vh 0 50vh #2f3640;
+    color: white;
+  }
