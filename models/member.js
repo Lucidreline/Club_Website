@@ -6,6 +6,7 @@ var MemberSchema = new mongoose.Schema({
     lastName: String,
     position: String,
     image: String,
+    imageId: String,
     boardMember: Boolean
 });
 var Member = mongoose.model("Member", MemberSchema);

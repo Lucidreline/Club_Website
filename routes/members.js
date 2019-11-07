@@ -50,7 +50,12 @@ router.post("/members", isLoggedIn, upload.single("image"), function(req, res){
         //removes the script from position... not useful now but it will later
     //req.body.member.position = req.sanitize(req.body.member.body)
     cloudinary.uploader.upload(req.file.path, function(err, result){
+        if(err){
+            console.log("Could not upload photo to cloudinary");
+            return res.redirect("back");
+        }
         req.body.member.image = result.secure_url;
+        req.body.member.imageId = result.public_id;
         
         Member.create(req.body.member, function(err, newMember){
             if(err){
@@ -91,32 +96,56 @@ router.get("/members/:id/edit", isLoggedIn, function(req, res){
 })
 
 //Update Route
-router.put("/members/:id", isLoggedIn, function(req, res){
-    //Member.findByIdAndUpdate(ID to find, new DataCue, callback)
-    
+router.put("/members/:id", isLoggedIn, upload.single("image"), function(req, res){
     //This allows us to remove someone as a board member
-    if(!req.body.member.boardMember){
-        //if the checkbox is not clicked
-        req.body.member.boardMember = false;
-    }
-    Member.findByIdAndUpdate(req.params.id, req.body.member, function(err, updatedMember){
+    
+    console.log("Made it here 1");
+    //Member.findByIdAndUpdate(ID to find, new DataCue, callback)
+    Member.findById(req.params.id, async function(err, foundMember){
         if(err){
             console.log("Could not update member");
             res.redirect("/members")
         }else{
-            res.redirect("/members/" + req.params.id)
+            if(req.file){
+                try{
+                    console.log("in the try catch")
+                    await cloudinary.uploader.destroy(foundMember.imageId)
+                    var result = await cloudinary.uploader.upload(req.file.path)
+                    foundMember.image = result.secure_url;
+                    foundMember.imageId = result.public_id; 
+                }catch(err){
+                    console.log("Could not update image");
+                    return res.redirect("/members")
+                }         
+                      
+            }
+            if(req.body.member.boardMember){
+                //if the checkbox is not clicked
+                foundMember.boardMember = true;
+            }else{
+                foundMember.boardMember = false;
+            }
+
+            foundMember.firstName = req.body.member.firstName
+            foundMember.lastName = req.body.member.lastName
+            foundMember.position  = req.body.member.position
+            foundMember.save()
+            res.redirect("/members/" + foundMember._id);
         }
     })
 })
 
 //DESTROYER!
 router.delete("/members/:id", isLoggedIn, function(req, res){
-    Member.findByIdAndRemove(req.params.id, function(err){
+    Member.findById(req.params.id, async function(err, foundMember){
         if(err){
             console.log("Could not delete member");
             res.redirect("/members");
         }
         else{
+            await cloudinary.uploader.destroy(foundMember.imageId);
+            foundMember.remove();
+
             res.redirect("/members");
         }
     })
