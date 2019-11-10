@@ -1,0 +1,135 @@
+<% include ../partials/header %>
+
+<% if(currentAdmin){ %>
+    <hr>
+    <h1> Welcome Admin!</h1>
+    <hr>
+    <br>
+<%}%>
+
+<div class="text-center">
+    <h1>
+        Beta Epsilon Sigma
+    </h1>
+    <h3>
+        Frater Sorem
+    </h3>
+    <h4>
+        First Among Equals
+    </h4>
+</div>
+
+<div class="row justify-content-around my-5">
+    <div class="col-md-5 col-sm-12 text-center">
+        <h2>
+            Mission
+        </h2>
+        <hr>
+        <p>
+            *Copy and paste this later* Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum magni ex a tenetur maxime quod tempore voluptates nesciunt rerum. Maxime fugit quas vel amet quo aspernatur molestiae, consequatur impedit aliquid.
+        </p>
+    </div>
+    <div class="col-md-5 col-sm-12 text-center">
+        <h2>
+            Motto
+        </h2>
+        <hr>
+        <p>
+            *Copy and paste this later* Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum magni ex a tenetur maxime quod tempore voluptates nesciunt rerum. Maxime fugit quas vel amet quo aspernatur molestiae, consequatur impedit aliquid.
+        </p>
+    </div>
+</div>
+
+<div class="homeBody">
+    <% if(bMembers.length > 0){ %>
+        <h2>
+            Meet the board of directors
+        </h2>
+
+        <div class="row">
+            <% bMembers.forEach(function(member){ %>
+                <div class="col-md-4 col-sm-12">
+                    <a href="/members/<%= member._id %>">
+                        <img class="boardMemberHeadshots" src="<%= member.image %>">
+                    </a>
+                    <h4 class="text-center"><%= member.firstName %></h4>
+                </div>
+            <% })%>
+        </div>
+
+        <br>
+        <hr>
+        <br>
+
+    <% } %>
+    <% if (allMembers.length > 0) { %>
+        <% var maxMembers = 0; %>
+
+        <h1>Newest Members</h1>
+        <div class="row">
+
+            <% if(allMembers.length == 1){ %>
+                <% maxMembers = 1; %>
+            <% } %>
+            <%if(allMembers.length > 1){ %>
+                <% maxMembers = 2; %>
+            <%} %>
+
+            <% for(var i = 0; i<maxMembers; i++){ %>
+                <div class="col-md-4 col-sm-12">
+                    <a href="/members/<%= allMembers[i]._id %>">
+                        <img class="boardMemberHeadshots" src="<%= allMembers[i].image %>">
+                    </a>
+                    <h4 class="text-center">
+                        <%= allMembers[i].firstName %>
+                    </h4>
+                </div>
+            <% }%>
+
+            <div class="col-md-4 col-sm-12">
+                <a href="/members">
+                    <button class="viewAllBtn">View All!</button>
+                </a>
+            </div>
+
+        <% } %>
+    </div>
+
+    <br>
+    <hr>
+    <br>
+
+    <% if(announcements.length > 0){ %>
+        <% var maxAnnouncements = 0; %>
+        <% if(announcements.length == 1){ %>
+            <% maxAnnouncements = 1; %>
+        <% } %>
+
+        <% if(announcements.length > 1){ %>
+            <% maxAnnouncements = 2; %>
+        <% } %>
+
+        <h1 class="text-center">Latest Announcements</h1>
+        <div class="row">
+            <% for(var i = 0; i<maxAnnouncements; i++){ %>
+                <div class="col-12 text-center">
+                    <h4>
+                        <%= announcements[i].title %>
+                    </h4>
+                    <p>
+                        <%= announcements[i].body %>
+                    </p>
+                </div>
+            <% }%>
+
+            <div class="col-12 text-center">
+                <a href="/announcements">
+                    <button class="btn btn-primary">View More</button>
+                </a>
+            </div>
+        </div>
+    <% } %>
+</div>
+
+
+<% include ../partials/footer %>

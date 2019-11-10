@@ -28,7 +28,7 @@ router.post("/admin/register", function(req, res){
                 return res.render("admin/register");
             }
             passport.authenticate("local")(req, res, function(){
-                res.render("mainPages/home");
+                res.render("index/home");
             })
         })
     }else{

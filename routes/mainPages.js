@@ -28,7 +28,7 @@ router.get("/home",function(req, res){
                             console.log("Could not find announcements for /home... : " + err.message);
                         }else{
                             announcements = foundAnnouncements;
-                            res.render("mainPages/home",{bMembers: boardMembers, allMembers: members, announcements: announcements});
+                            res.render("index/home",{bMembers: boardMembers, allMembers: members, announcements: announcements});
                         }
                     }) 
                 }

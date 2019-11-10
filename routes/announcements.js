@@ -69,6 +69,18 @@ router.put("/announcements/:id", isLoggedIn,  function(req, res){
     })
 })
 
+//Confirm that you want to delete
+router.get("/announcements/:id/delete", function(req, res){
+    Announcement.findById(req.params.id, function(err, foundAnnouncement){
+        if(err){
+            console.log("Cant find announcement for the delete confirmation..." + err.message);
+        }else{
+            res.render("announcements/deleteConfirmation", {announcement: foundAnnouncement});
+        }
+    })
+})
+
+//Actually deletes the announcement
 router.delete("/announcements/:id", isLoggedIn, function(req, res){
     Announcement.findByIdAndRemove(req.params.id, function(err, deletedAnnouncement){
         if(err){
