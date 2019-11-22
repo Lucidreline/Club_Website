@@ -25,14 +25,8 @@
 
     </div>
     <div class="col-lg">
-        <!-- <form action="/admin/register" method="POST">
-            <input type="text" name="username" placeholder="Username">
-            <input type="password" name="password" placeholder="Password">
-            <input type="password" name="key" placeholder="Admin Key">
-            <button>Submit</button>
-        </form> -->
-
-        <form action="/admin/register" method="POST">
+        <div id="errArea"></div>
+        <form id="adminReg" action="/admin/register" method="POST">
             <div class="form-group">
                 <label for="adminRegisterUsername">Username</label>
                 <input type="text" name="username" placeholder="Username" class="form-control" id="adminRegisterUsername">
@@ -42,7 +36,7 @@
                 <input type="password" name="password" placeholder="Password" class="form-control" id="adminRegisterPassword">
             </div>
             <div class="form-group">
-                <label for="adminRegisterKey">Password</label>
+                <label for="adminRegisterKey">Admin Key</label>
                 <input type="password" name="key" placeholder="Key" class="form-control" id="adminRegisterKey">
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
@@ -50,6 +44,8 @@
 
     </div>
 </div>
+
+<script src="/scripts/adminRegister.js"></script>
 
 <% include ../partials/footer %>
 
