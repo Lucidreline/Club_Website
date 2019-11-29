@@ -10,6 +10,8 @@ router.get("/", function(req, res){
     res.redirect("/home");
 })
 
+router.get("/error", (req,res)=> res.render("index/404"))
+
 router.get("/home",function(req, res){
     var boardMembers, members, announcements;
     //means we can move on from the code untl it is completely finished
