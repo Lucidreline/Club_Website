@@ -7,6 +7,10 @@ var MemberSchema = new mongoose.Schema({
     class: String,
     position: String,
     bio: String,
+    instagram: String,
+    snapchat: String,
+    twitter: String,
+    linkedIn: String,
     image: String,
     imageId: String,
     boardMember: Boolean

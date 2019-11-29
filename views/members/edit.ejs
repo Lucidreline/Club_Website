@@ -3,13 +3,6 @@
 <% var classOptions = ["Freshman", "Sophomore", "Junior", "Senior"]%>
 
 <h1>Edit <%= member.firstName + " " + member.lastName %></h1>
-    <!-- <form action="/members/<%= member._id%>?_method=PUT" method="POST">
-        <input type="text" name="member[firstName]" value="<%= member.firstName%>">
-        <input type="text" name="member[lastName]" value="<%= member.lastName%>">
-        <input type="text" name="member[position]" value="<%= member.position%>">
-        <input type="submit">
-    </form> -->
-
     <form action="/members/<%= member._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="editMemberFirstName">Member's First Name</label>
@@ -49,6 +42,26 @@
             <label for="newMemberBio">Member Bio</label>
             <textarea minlength="250" required name="member[bio]" class="form-control" id="newMemberBio" rows="3"><%= member.bio %></textarea>
         </div>
+
+        <!-- Social Media -->
+        <h3>Leave blank if they dont have one!</h3>
+        <div class="form-group">
+            <label for="newMemberInstagram">Member's Instagram Link</label>
+            <input value="<%= member.instagram%>" type="text" name="member[instagram]" placeholder="Instagram Link" class="form-control" id="newMemberInstagram">
+        </div>
+        <div class="form-group">
+            <label for="newMemberSnapchat">Member's Snapchat Link</label>
+            <input value="<%= member.snapchat%>" type="text" name="member[snapchat]" placeholder="Snapchat Link" class="form-control" id="newMemberSnapchat">
+        </div>
+        <div class="form-group">
+            <label for="newMemberTwitter">Member's Twitter Link</label>
+            <input value="<%= member.twitter%>" type="text" name="member[twitter]" placeholder="Twitter Link" class="form-control" id="newMemberTwitter">
+        </div>
+        <div class="form-group">
+            <label for="newMemberLinkedIn">Member's LinkedIn Link</label>
+            <input value="<%= member.linkedIn%>" type="text" name="member[linkedIn]" placeholder="LinkedIn Link" class="form-control" id="newMemberLinkedIn">
+        </div>
+
         <div class="form-group">
             <label for="image">Headshot of member</label>
             <input type="file" id="image" name="image" accept="image/*">

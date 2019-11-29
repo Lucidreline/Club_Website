@@ -109,6 +109,7 @@ router.put("/members/:id", isLoggedIn, upload.single("image"), function(req, res
         }else{
             if(req.file){
                 try{
+                    //maybe put code here
                     await cloudinary.uploader.destroy(foundMember.imageId)
                     var result = await cloudinary.uploader.upload(req.file.path)
                     foundMember.image = result.secure_url;
@@ -125,11 +126,17 @@ router.put("/members/:id", isLoggedIn, upload.single("image"), function(req, res
             }else{
                 foundMember.boardMember = false;
             }
+
+            //find out if there is a better way to do this
             foundMember.firstName = req.body.member.firstName
             foundMember.lastName = req.body.member.lastName
             foundMember.position  = req.body.member.position
             foundMember.class = req.body.member.class
             foundMember.bio = req.body.member.bio
+            foundMember.instagram = req.body.member.instagram ;
+            foundMember.snapchat = req.body.member.snapchat ;
+            foundMember.twitter = req.body.member.twitter ;
+            foundMember.linkedIn = req.body.member.linkedIn ;
             foundMember.save()
             res.redirect("/members/" + foundMember._id);
         }

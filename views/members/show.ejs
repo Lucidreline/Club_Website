@@ -1,4 +1,6 @@
 <% include ../partials/header %>
+<link rel="stylesheet" type= 'text/css' href="/stylesheets/socialMedia.css">
+
 
     <div class="row">
         <div class="col-12">
@@ -16,6 +18,37 @@
                 Bio:
             </h3>
             <p><%= member.bio %></p>
+        </div>
+        <div class="col-lg-4 outter-SocialMedia">
+                <h3 class="text-center">
+                        Social Media: 
+                </h3>
+            <div class="social-media text-center">
+                <% if(member.instagram){ %>
+                    <a target="_blank" href="<%= member.instagram %>"><i class="fab fa-instagram"></i></a>
+                <% } %>
+
+                <% if(member.snapchat){ %>
+                    <a target="_blank" href="<%= member.snapchat %>"><i class="fab fa-snapchat-ghost"></i></a>
+                <% } %>
+
+                <% if(member.twitter){ %>
+                    <a target="_blank" href="<%= member.twitter %>"><i class="fab fa-twitter"></i></a>
+                <% } %>
+
+                <% if(member.linkedIn){ %>
+                    <a target="_blank" href="<%= member.linkedIn %>"><i class="fab fa-linkedin-in"></i></a>
+                <% } %>
+
+                
+
+
+            </div>
+            <% if(!member.instagram && !member.snapchat && !member.twitter && !member.linkedIn){ %>
+                <p class="text-center">
+                    <%= member.firstName %> has not yet added their social media...
+                </p>
+            <% } %>
         </div>
     </div>
 

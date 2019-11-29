@@ -1,0 +1,30 @@
+.social-media{
+    margin-top: 20px;
+}
+
+.social-media a{
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    color: white;
+    margin: 0 6px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.social-media a:hover{
+    background: aquamarine;
+}
+
+.social-media a i{
+    transition: 0.4s all;
+}
+
+.social-media a:hover > i{
+    transform: scale(1.5) rotate(25deg);
+}
