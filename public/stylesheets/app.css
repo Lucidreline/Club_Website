@@ -1,5 +1,25 @@
+/* 
+Main colors:
+red: #580c1f
+blue: #0c4558
+white: #fff
+ */
 
 
+
+ /* NAV BAR ---------------------- */
+#navvyBar{
+  background-color: #580c1f;
+  margin-bottom: 20px;
+}
+#navvyBar a{
+  color: #fff;
+}
+
+
+
+
+ /* HOME PAGE ---------------------- */
 .board-thumbnails { 
     background-repeat: no-repeat;
     background-size: cover;
@@ -29,10 +49,17 @@
   }
 
 
+
+
+ /* SHOW PAGE ------------------------- */
   #show-page-photo{
     height: 650px;
   }
 
+
+
+
+  /* FOOTER ---------------------------- */
   .footer{
     background-color: #2f3640;
     box-shadow: 0 50vh 0 50vh #2f3640;

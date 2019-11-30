@@ -6,7 +6,7 @@
     display: inline-flex;
     width: 40px;
     height: 40px;
-    background-color: red;
+    background-color: #0c4558;
     color: white;
     margin: 0 6px;
     border-radius: 50%;
@@ -18,7 +18,7 @@
 }
 
 .social-media a:hover{
-    background: aquamarine;
+    background: #580c1f;
 }
 
 .social-media a i{
@@ -26,5 +26,5 @@
 }
 
 .social-media a:hover > i{
-    transform: scale(1.5) rotate(25deg);
+    transform: scale(1.2) rotate(25deg);
 }
